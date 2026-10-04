@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ QRGenZ | Aesthetic QR Code Maker ✨</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="QRGenZ - The free aesthetic QR code maker. Create scannable links, secret wish messages, and cute custom QR codes.">
+    <meta name="keywords" content="QRGenZ, QR code generator, free QR code maker, secret message QR, GenZ QR code, aesthetic QR code">
+    <meta property="og:title" content="✨ QRGenZ | No Cap ✨">
+    <meta property="og:description" content="Drop a link or spill some tea to generate the most aesthetic QR codes.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & Lucide Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Canvas Confetti for Secret Wish celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .floating-emoji {
+            animation: float 4s ease-in-out infinite;
+        }
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker-move {
+            display: inline-block;
+            animation: ticker 15s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-[#c1e1c1] text-black selection:bg-[#ffb6c1] selection:text-black overflow-x-hidden">
+
+    <div id="app-root">
+        <!-- Dynamically rendered via JavaScript below -->
+    </div>
+
+    <script>
+        // State Management
+        let state = {
+            activeTab: 'link',
+            inputValue: '',
+            secretMessage: '',
+            qrUrl: '',
+            theme: '000000',
+            themeName: 'Void',
+            isGenerating: false,
+            isCopied: false,
+            isReceiverMode: false,
+            receivedMessage: '',
+            isBoxOpened: false
+        };
+
+        // Check URL parameters on load for Secret Wish receiver mode
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            if (msg) {
+                try {
+                    const decodedMsg = decodeURIComponent(escape(atob(msg)));
+                    state.isReceiverMode = true;
+                    state.receivedMessage = decodedMsg;
+                } catch (e) {
+                    console.error("Could not decode message", e);
+                }
+            }
+            render();
+        });
+
+        function getCleanBaseUrl() {
+            let url = window.location.href.split('?')[0];
+            if (url.startsWith('blob:')) {
+                url = url.substring(5);
+            }
+            return url;
+        }
+
+        function generateQR() {
+            state.isGenerating = true;
+            render();
+
+            setTimeout(() => {
+                let finalData = '';
+                if (state.activeTab === 'link') {
+                    finalData = state.inputValue || 'https://example.com';
+                } else {
+                    const encodedMsg = btoa(unescape(encodeURIComponent(state.secretMessage || 'No cap, you forgot to type a message!')));
+                    finalData = `${getCleanBaseUrl()}?msg=${encodedMsg}`;
+                }
+
+                const encodedData = encodeURIComponent(finalData);
+                state.qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodedData}&color=${state.theme}&bgcolor=ffffff&margin=10`;
+                state.isGenerating = false;
+                render();
+            }, 800);
+        }
+
+        async function downloadQR() {
+            if (!state.qrUrl) return;
+            try {
+                const response = await fetch(state.qrUrl);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = 'QRGenZ-Aesthetic-Code.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                console.error("Download failed", err);
+            }
+        }
+
+        async function handleShare() {
+            if (!state.qrUrl) return;
+            let linkToShare = state.activeTab === 'link' 
+                ? state.inputValue 
+                : `${getCleanBaseUrl()}?msg=${btoa(unescape(encodeURIComponent(state.secretMessage)))}`;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'QRGenZ',
+                        text: 'I made this dope aesthetic QR code on QRGenZ! ✨',
+                        url: linkToShare,
+                    });
+                } catch (err) {
+                    console.log('Share canceled', err);
+                }
+            } else {
+                try {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = linkToShare;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textArea);
+                    
+                    state.isCopied = true;
+                    render();
+                    setTimeout(() => {
+                        state.isCopied = false;
+                        render();
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy', err);
+                }
+            }
+        }
+
+        function testSecretWish() {
+            if (!state.secretMessage) return;
+            const encodedMsg = btoa(unescape(encodeURIComponent(state.secretMessage)));
+            const finalUrl = `${getCleanBaseUrl()}?msg=${encodedMsg}`;
+            window.open(finalUrl, '_blank');
+        }
+
+        function openGiftBox() {
+            state.isBoxOpened = true;
+            if (window.confetti) {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+            render();
+        }
+
+        function render() {
+            const root = document.getElementById('app-root');
+
+            if (state.isReceiverMode) {
+                root.innerHTML = `
+                    <div class="min-h-screen bg-[#e0c3fc] flex items-center justify-center p-4 font-sans overflow-hidden relative selection:bg-[#ffb6c1]">
+                        <div class="absolute inset-0 pointer-events-none opacity-40">
+                            <div class="absolute top-10 left-10 text-5xl floating-emoji">✨</div>
+                            <div class="absolute bottom-20 right-10 text-6xl floating-emoji" style="animation-delay: 1s;">💖</div>
+                            <div class="absolute top-1/4 right-1/4 text-4xl floating-emoji" style="animation-delay: 2s;">🎀</div>
+                            <div class="absolute bottom-1/4 left-1/4 text-5xl floating-emoji" style="animation-delay: 1.5s;">💫</div>
+                        </div>
+
+                        ${!state.isBoxOpened ? `
+                            <div onclick="openGiftBox()" class="cursor-pointer flex flex-col items-center gap-6 z-10 transition-transform hover:scale-110 active:scale-95 duration-300">
+                                <div class="text-9xl drop-shadow-[0_20px_20px_rgba(0,0,0,0.3)] animate-bounce">
+                                    🎁
+                                </div>
+                                <div class="bg-white border-4 border-black px-8 py-3 rounded-full shadow-[8px_8px_0px_rgba(0,0,0,1)] text-2xl font-black uppercase tracking-widest text-[#ec4899]">
+                                    Tap to Open!
+                                </div>
+                            </div>
+                        ` : `
+                            <div class="bg-white border-4 border-black p-8 md:p-10 rounded-[2rem] max-w-md w-full shadow-[16px_16px_0px_rgba(0,0,0,1)] text-center z-10 relative overflow-hidden transition-all transform scale-100">
+                                <div class="text-7xl mb-6">💌</div>
+                                <h1 class="text-3xl font-black mb-8 uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+                                    A Secret Wish!
+                                </h1>
+                                <div class="bg-[#f8f9fa] border-4 border-black p-6 rounded-2xl mb-8 relative transform -rotate-1">
+                                    <div class="absolute -top-3 -left-3 text-2xl">📌</div>
+                                    <p class="text-xl font-black text-gray-800 break-words whitespace-pre-wrap leading-relaxed">
+                                        ${escapeHtml(state.receivedMessage)}
+                                    </p>
+                                </div>
+                                <button onclick="window.location.href = window.location.pathname" class="w-full bg-[#fdfd96] border-4 border-black py-4 rounded-2xl font-black uppercase text-lg hover:bg-[#c1e1c1] transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none">
+                                    Make Your Own QRGenZ ✨
+                                </button>
+                            </div>
+                        `}
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            // Main Generator Dashboard
+            root.innerHTML = `
+                <!-- Ticker Tape -->
+                <div class="absolute top-0 left-0 w-full overflow-hidden bg-black text-[#fdfd96] py-2 border-b-4 border-black z-0 ticker-wrap">
+                    <div class="ticker-move font-black uppercase tracking-widest text-sm flex gap-10">
+                        <span>✨ WELCOME TO QRGENZ ✨</span>
+                        <span>🐐 THE GOAT OF QR CODES 🐐</span>
+                        <span>💖 MAKE A SECRET WISH 💖</span>
+                        <span>🚀 DROP YOUR LINK 🚀</span>
+                        <span>✨ WELCOME TO QRGENZ ✨</span>
+                        <span>🐐 THE GOAT OF QR CODES 🐐</span>
+                        <span>💖 MAKE A SECRET WISH 💖</span>
+                        <span>🚀 DROP YOUR LINK 🚀</span>
+                    </div>
+                </div>
+
+                <div class="max-w-5xl mx-auto pt-16 px-4 md:px-8 pb-12">
+                    <!-- Header -->
+                    <header class="text-center relative z-10 mb-12 mt-6">
+                        <div class="inline-block bg-white border-4 border-black px-10 py-5 rounded-full shadow-[12px_12px_0px_rgba(0,0,0,1)] rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105">
+                            <h1 class="text-4xl md:text-6xl font-black tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
+                                QRGenZ
+                            </h1>
+                        </div>
+                        <div class="mt-8">
+                            <p class="text-xl font-bold bg-[#fdfd96] inline-block px-6 py-2 border-4 border-black rounded-xl transform rotate-1 shadow-[6px_6px_0px_rgba(0,0,0,1)]">
+                                No cap, the most aesthetic QR maker. 💅
+                            </p>
+                        </div>
+                    </header>
+
+                    <!-- Workbench Container -->
+                    <main class="bg-white border-4 border-black rounded-[2.5rem] p-6 md:p-10 shadow-[20px_20px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row gap-12 relative z-10">
+                        
+                        <!-- Left Panel: Inputs -->
+                        <div class="flex-1 space-y-8">
+                            <!-- Tabs -->
+                            <div class="flex p-2 bg-gray-100 border-4 border-black rounded-2xl shadow-[6px_6px_0px_rgba(0,0,0,1)]">
+                                <button onclick="state.activeTab = 'link'; state.qrUrl = ''; render();" class="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-black uppercase text-sm md:text-base transition-all ${state.activeTab === 'link' ? 'bg-[#ffb6c1] border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] translate-y-[-2px]' : 'hover:bg-gray-200 text-gray-500 border-4 border-transparent'}">
+                                    <i data-lucide="link" class="w-5 h-5"></i> Normal Link
+                                </button>
+                                <button onclick="state.activeTab = 'secret'; state.qrUrl = ''; render();" class="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-black uppercase text-sm md:text-base transition-all ${state.activeTab === 'secret' ? 'bg-[#fdfd96] border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] translate-y-[-2px]' : 'hover:bg-gray-200 text-gray-500 border-4 border-transparent'}">
+                                    <i data-lucide="gift" class="w-5 h-5"></i> Secret Wish
+                                </button>
+                            </div>
+
+                            <!-- Dynamic Input Area -->
+                            <div class="space-y-4">
+                                ${state.activeTab === 'link' ? `
+                                    <div>
+                                        <label class="block font-black uppercase text-base mb-3 ml-2 flex items-center gap-2">
+                                            Drop your link here 🌐
+                                        </label>
+                                        <input type="url" placeholder="https://tiktok.com/@yourusername" value="${escapeHtml(state.inputValue)}" oninput="state.inputValue = this.value" class="w-full border-4 border-black rounded-2xl p-5 text-xl font-bold bg-[#f8f9fa] focus:outline-none focus:bg-[#e0c3fc] transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] placeholder:text-gray-400" />
+                                    </div>
+                                ` : `
+                                    <div>
+                                        <label class="block font-black uppercase text-base mb-3 ml-2 flex items-center gap-2">
+                                            Spill the tea / Write a wish 💌
+                                        </label>
+                                        <textarea placeholder="Type a secret message that only shows up when they scan it!" oninput="state.secretMessage = this.value" rows="4" class="w-full border-4 border-black rounded-2xl p-5 text-xl font-bold bg-[#f8f9fa] focus:outline-none focus:bg-[#ffb6c1] transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] resize-none placeholder:text-gray-400">${escapeHtml(state.secretMessage)}</textarea>
+                                    </div>
+                                `}
+                            </div>
+
+                            <!-- Theme Picker -->
+                            <div>
+                                <label class="flex items-center gap-2 font-black uppercase text-base mb-4 ml-2">
+                                    <i data-lucide="palette" class="w-5 h-5"></i> Pick a Vibe
+                                </label>
+                                <div class="flex gap-4 flex-wrap">
+                                    ${[
+                                        { name: 'Void', color: '000000', display: 'bg-black' },
+                                        { name: 'Slime', color: '84cc16', display: 'bg-[#84cc16]' },
+                                        { name: 'Barbie', color: 'ec4899', display: 'bg-[#ec4899]' },
+                                        { name: 'Ocean', color: '0ea5e9', display: 'bg-[#0ea5e9]' },
+                                        { name: 'Grape', color: '9333ea', display: 'bg-[#9333ea]' }
+                                    ].map(t => `
+                                        <button onclick="state.theme = '${t.color}'; state.themeName = '${t.name}'; render();" class="w-14 h-14 rounded-full border-4 border-black ${t.display} transition-all hover:scale-110 ${state.theme === t.color ? 'shadow-[6px_6px_0px_rgba(0,0,0,1)] scale-110 ring-4 ring-offset-4 ring-black' : ''}" title="${t.name}"></button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Generate Button -->
+                            <button onclick="generateQR()" class="w-full bg-black text-white font-black uppercase text-2xl py-6 rounded-2xl flex items-center justify-center gap-4 shadow-[8px_8px_0px_#ec4899] border-4 border-black transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_#ec4899] active:translate-x-2 active:translate-y-2 active:shadow-none">
+                                ${state.isGenerating ? '<i data-lucide="scan-eye" class="w-8 h-8 animate-spin"></i> Cooking... 🍳' : '<i data-lucide="sparkles" class="w-8 h-8 text-[#fdfd96]"></i> Generate QR ✨'}
+                            </button>
+                        </div>
+
+                        <!-- Right Panel: Preview Area -->
+                        <div class="flex-1 flex flex-col items-center justify-center bg-gray-50 border-4 border-black rounded-[2rem] p-8 relative overflow-hidden border-dashed">
+                            <h3 class="font-black uppercase text-2xl mb-8 bg-white px-6 py-2 border-4 border-black rounded-full shadow-[6px_6px_0px_rgba(0,0,0,1)] z-10 transform -rotate-2">
+                                Live Preview
+                            </h3>
+
+                            <div class="bg-white p-5 border-4 border-black rounded-3xl shadow-[12px_12px_0px_rgba(0,0,0,1)] mb-10 z-10 h-72 w-72 flex items-center justify-center relative">
+                                ${state.qrUrl ? `
+                                    <img src="${state.qrUrl}" alt="Generated QR Code" class="w-full h-full object-cover rounded-xl transition-all duration-500 scale-100" />
+                                ` : `
+                                    <div class="text-gray-300 flex flex-col items-center gap-4">
+                                        <i data-lucide="scan-eye" class="w-16 h-16 animate-pulse"></i>
+                                        <p class="font-black uppercase text-base tracking-widest text-center">Ready to <br/>cook</p>
+                                    </div>
+                                `}
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex gap-4 w-full z-10">
+                                <button onclick="downloadQR()" ${!state.qrUrl ? 'disabled' : ''} class="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl border-4 border-black font-black uppercase text-sm md:text-base transition-all ${state.qrUrl ? 'bg-white hover:bg-[#c1e1c1] shadow-[6px_6px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[6px]' : 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50'}">
+                                    <i data-lucide="download" class="w-5 h-5"></i> Save
+                                </button>
+                                
+                                ${state.activeTab === 'secret' ? `
+                                    <button onclick="testSecretWish()" ${!state.qrUrl ? 'disabled' : ''} class="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl border-4 border-black font-black uppercase text-sm md:text-base transition-all ${state.qrUrl ? 'bg-[#0ea5e9] text-white hover:bg-[#38bdf8] shadow-[6px_6px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[6px]' : 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50'}">
+                                        <i data-lucide="eye" class="w-5 h-5"></i> Test It! 🪄
+                                    </button>
+                                ` : `
+                                    <button onclick="handleShare()" ${!state.qrUrl ? 'disabled' : ''} class="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl border-4 border-black font-black uppercase text-sm md:text-base transition-all ${state.qrUrl ? 'bg-[#e0c3fc] hover:bg-[#d8b4fe] shadow-[6px_6px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[6px]' : 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50'}">
+                                        <i data-lucide="${state.isCopied ? 'check-circle-2' : 'share-2'}" class="w-5 h-5"></i> ${state.isCopied ? 'Copied!' : 'Share'}
+                                    </button>
+                                `}
+                            </div>
+                        </div>
+                    </main>
+
+                    <!-- SEO / FAQ Section -->
+                    <section class="mt-16 bg-white border-4 border-black rounded-[2rem] p-8 md:p-12 shadow-[16px_16px_0px_rgba(0,0,0,1)] text-left mb-12 relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 text-9xl opacity-10 rotate-12">🐐</div>
+                        
+                        <h2 class="text-4xl font-black mb-8 uppercase tracking-widest inline-block relative">
+                            Why QRGenZ is Goated 🐐
+                            <div class="absolute -bottom-2 left-0 w-full h-4 bg-[#fdfd96] -z-10 transform -rotate-1"></div>
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6 relative z-10">
+                            <div class="bg-[#f8f9fa] p-6 border-4 border-black rounded-2xl shadow-[6px_6px_0px_rgba(0,0,0,1)]">
+                                <h3 class="text-2xl font-black uppercase bg-[#ffb6c1] inline-block px-3 py-1 border-4 border-black rounded-xl mb-4 transform -rotate-2">
+                                    What is this?
+                                </h3>
+                                <p class="font-bold text-gray-800 leading-relaxed text-lg">
+                                    QRGenZ is a free, aesthetic, and fully custom <strong>QR Code Generator</strong>. Whether you need to share a TikTok, a Spotify playlist, or a secret, our dynamic QR code maker generates it instantly. 
+                                </p>
+                            </div>
+                            
+                            <div class="bg-[#f8f9fa] p-6 border-4 border-black rounded-2xl shadow-[6px_6px_0px_rgba(0,0,0,1)]">
+                                <h3 class="text-2xl font-black uppercase bg-[#e0c3fc] inline-block px-3 py-1 border-4 border-black rounded-xl mb-4 transform rotate-2">
+                                    Secret Wish 💌
+                                </h3>
+                                <p class="font-bold text-gray-800 leading-relaxed text-lg">
+                                    The <strong>Secret Message QR Code</strong> feature lets you encode a hidden message. When your bestie scans it, they get a bouncy, animated gift box surprise! Perfect for birthdays and cute moments.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Footer -->
+                    <footer class="text-center pb-12 pt-4 flex flex-col items-center gap-8">
+                        <!-- Buy Me A Coffee Button -->
+                        <a href="https://www.buymeacoffee.com/skmdsohaib" target="_blank" rel="noopener noreferrer" class="inline-block shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[8px] hover:translate-x-[8px] transition-all rounded-[14px] overflow-hidden border-4 border-black">
+                            <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=skmdsohaib&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" class="h-[50px]" />
+                        </a>
+
+                        <div class="inline-block bg-white px-8 py-4 border-4 border-black rounded-full shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-[8px] hover:translate-x-[8px] transition-all cursor-crosshair">
+                            <p class="font-black uppercase tracking-widest text-lg">
+                                Created with 💖 by <span class="text-[#ec4899] underline decoration-4 underline-offset-4">sk md sohaib</span> 🚀
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
