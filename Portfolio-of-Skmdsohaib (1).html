@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Sk Md Sohaib | Software Engineer & Automation Developer</title>
+    <meta name="title" content="Sk Md Sohaib | Software Engineer & Automation Developer">
+    <meta name="description" content="Official portfolio of Sk Md Sohaib. Python Learner, Software Engineer, and Automation Developer in Burdwan, West Bengal.">
+    <meta name="keywords" content="Sk Md Sohaib, Sohaib, Portfolio, Python Developer, Software Engineer, Solo Animator, Burdwan Developer">
+    <meta name="author" content="Sk Md Sohaib">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#030305">
+    <link rel="canonical" href="https://skmd-sohaib.github.io/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2310b981'>%3E_</text></svg>">
+
+    <!-- Open Graph / Social Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://skmd-sohaib.github.io/">
+    <meta property="og:title" content="Sk Md Sohaib | Software Engineer">
+    <meta property="og:description" content="Python Learner & Aspiring Software Engineer building real-world web apps, WhatsApp tools, and AI solutions.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#030305',
+                            dark: '#08080b',
+                            gray: '#0e0e12',
+                            lightgray: '#17171e',
+                            accent: '#10b981', // Emerald terminal green
+                            accentBright: '#34d399',
+                            textMain: '#f3f4f6',
+                            textMuted: '#9ca3af'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030305; }
+        ::-webkit-scrollbar-thumb { background: #17171e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+        
+        .text-glow { text-shadow: 0 0 12px rgba(16, 185, 129, 0.5); }
+        .text-glow-lg { text-shadow: 0 0 24px rgba(16, 185, 129, 0.75); }
+        
+        .blinking-cursor::after {
+            content: '_';
+            animation: blink 1.1s step-start infinite;
+            color: #10b981;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Floating motion animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        .animate-float { animation: floatSlow 4.5s ease-in-out infinite; }
+
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-1deg); }
+        }
+        .animate-float-reverse { animation: floatReverse 5s ease-in-out infinite; }
+
+        /* Glowing border pulse animation */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.35); }
+            50% { box-shadow: 0 0 35px rgba(16, 185, 129, 0.55); border-color: rgba(16, 185, 129, 0.85); }
+        }
+        .glow-box-pulse { animation: pulseGlow 3.5s infinite ease-in-out; }
+
+        /* Shimmer background animation */
+        @keyframes shimmerEffect {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .btn-shimmer {
+            background: linear-gradient(90deg, rgba(16,185,129,0.9) 0%, rgba(52,211,153,1) 50%, rgba(16,185,129,0.9) 100%);
+            background-size: 200% 100%;
+            animation: shimmerEffect 4s linear infinite;
+        }
+
+        /* Scroll reveal class animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px) scale(0.98);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Terminal Scanline overlay */
+        .scanline-box {
+            position: relative;
+            overflow: hidden;
+        }
+        .scanline-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.7), transparent);
+            opacity: 0.8;
+            animation: scanline 3.5s linear infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+        @keyframes scanline {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        #cursor-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.09) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .bg-grid-pattern {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+        }
+
+        .pricing-tab-btn.active {
+            background-color: rgba(16, 185, 129, 0.18);
+            color: #10b981;
+            border-color: #10b981;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Card 3D tilt smoothness */
+        .tilt-card {
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.25s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* Custom Click Sparkle Effect Canvas */
+        #clickCanvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Progress Bar Animation */
+        .skill-bar-fill {
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="bg-brand-black text-brand-textMain font-sans antialiased min-h-screen flex flex-col selection:bg-brand-accent selection:text-brand-black bg-grid-pattern overflow-x-hidden relative">
+
+    <!-- Click Burst Effect Canvas -->
+    <canvas id="clickCanvas"></canvas>
+
+    <!-- Interactive Particle Background Canvas -->
+    <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <div id="cursor-glow" class="hidden md:block" aria-hidden="true"></div>
+
+    <!-- Scroll Progress Top Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-brand-lightgray z-[100]">
+        <div id="scrollProgress" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-300 w-0 transition-all duration-75"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-brand-lightgray/40 py-4 px-6">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <a href="javascript:void(0)" onclick="navigateTo('home')" class="font-mono text-lg font-bold tracking-tight text-white flex items-center gap-2 hover:text-brand-accent transition-all group">
+                <span class="text-brand-accent text-glow group-hover:translate-x-1 transition-transform">&gt;</span>
+                <span class="tracking-wider uppercase font-extrabold text-white group-hover:text-brand-accent transition-colors">SOHAIB<span class="text-brand-accent blinking-cursor"></span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 font-mono text-xs text-brand-textMuted">
+                <a href="javascript:void(0)" onclick="navigateTo('home', 'about')" class="hover:text-brand-accent transition-colors"><span class="text-brand-accent">01.</span> About</a>
+                <a href="javascript:void(0)" onclick="navigateTo('home', 'projects')" class="hover:text-brand-accent transition-colors"><span class="text-brand-accent">02.</span> Work</a>
+                <a href="javascript:void(0)" onclick="navigateTo('home', 'education')" class="hover:text-brand-accent transition-colors"><span class="text-brand-accent">03.</span> Education</a>
+                <a href="javascript:void(0)" onclick="navigateTo('home', 'tech')" class="hover:text-brand-accent transition-colors"><span class="text-brand-accent">04.</span> Stack</a>
+                <a href="javascript:void(0)" onclick="navigateTo('home', 'contact')" class="hover:text-brand-accent transition-colors"><span class="text-brand-accent">05.</span> Contact</a>
+                <button onclick="navigateTo('pricing')" class="px-3 py-1.5 rounded bg-brand-accent/10 border border-brand-accent/40 text-brand-accent hover:bg-brand-accent hover:text-brand-black font-semibold transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)] hover:scale-105">
+                    <i class="fa-solid fa-tags text-[10px]"></i> Pricing &amp; Services
+                </button>
+            </nav>
+
+            <button id="mobileMenuBtn" class="md:hidden text-brand-textMain hover:text-brand-accent focus:outline-none p-2 rounded border border-brand-lightgray">
+                <i class="fa-solid fa-bars-staggered text-xl"></i>
+            </button>
+        </div>
+
+        <nav id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-brand-dark/95 border-b border-brand-lightgray/60 py-6 px-8 flex flex-col gap-4 font-mono text-sm shadow-2xl backdrop-blur-lg">
+            <a href="javascript:void(0)" onclick="navigateTo('home', 'about')" class="text-brand-textMuted hover:text-brand-accent">01. About</a>
+            <a href="javascript:void(0)" onclick="navigateTo('home', 'projects')" class="text-brand-textMuted hover:text-brand-accent">02. Work</a>
+            <a href="javascript:void(0)" onclick="navigateTo('home', 'education')" class="text-brand-textMuted hover:text-brand-accent">03. Education</a>
+            <a href="javascript:void(0)" onclick="navigateTo('home', 'tech')" class="text-brand-textMuted hover:text-brand-accent">04. Stack</a>
+            <a href="javascript:void(0)" onclick="navigateTo('home', 'contact')" class="text-brand-textMuted hover:text-brand-accent">05. Contact</a>
+            <button onclick="navigateTo('pricing')" class="text-left py-2 text-brand-accent font-bold flex items-center gap-2">
+                <i class="fa-solid fa-tags"></i> Pricing &amp; Services Page →
+            </button>
+        </nav>
+    </header>
+
+    <main class="flex-grow pt-20 relative z-10">
+
+        <!-- ================= PAGE 1: PORTFOLIO HOME ================= -->
+        <div id="page-home" class="page-view space-y-20">
+            
+            <!-- Hero Section -->
+            <section id="hero" class="min-h-[88vh] flex flex-col justify-center px-6 max-w-4xl mx-auto space-y-8 pt-10 reveal active">
+                <div class="font-mono text-xs sm:text-sm text-brand-accent text-glow flex items-center gap-2">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="bg-brand-accent/10 px-3 py-1 rounded-full border border-brand-accent/30 font-semibold">sys.init("Sk Md Sohaib")</span>
+                </div>
+                
+                <div class="space-y-2">
+                    <p class="text-xs font-mono text-brand-textMuted uppercase tracking-widest">SOFTWARE ENGINEER &amp; AUTOMATION DEVELOPER</p>
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white font-sans transition-all duration-300">
+                        Sk Md <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">Sohaib</span>
+                    </h1>
+                </div>
+                
+                <!-- Dynamic Animated Typing Headline -->
+                <h2 class="text-lg sm:text-2xl text-brand-textMuted font-mono font-medium flex items-center gap-2">
+                    <span class="text-brand-accent text-glow">&gt;</span>
+                    <span id="typed-text" class="text-white font-semibold"></span><span class="blinking-cursor"></span>
+                </h2>
+                
+                <div class="max-w-xl text-sm sm:text-base text-brand-textMuted leading-relaxed">
+                    <p class="border-l-2 border-brand-accent/50 pl-4 py-2 italic bg-brand-dark/50 rounded-r-lg border-gradient hover:border-brand-accent transition-all shadow-md">
+                        "Hi, I'm <strong class="text-white">Sk Md Sohaib</strong>. I build intelligent web tools, automated business solutions, and real-world software while continuously mastering modern computer science."
+                    </p>
+                </div>
+
+                <!-- Interactive Live Executable CLI Terminal Window with SOHAIB ASCII Art -->
+                <div class="bg-brand-dark rounded-xl border border-brand-lightgray p-4 sm:p-5 font-mono text-xs text-brand-textMuted space-y-3 shadow-2xl max-w-2xl scanline-box glow-box-pulse">
+                    <div class="flex items-center justify-between border-b border-brand-lightgray/40 pb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                            <span class="text-[11px] text-brand-textMuted/60 ml-2">&gt;_ sohaib_terminal.sh</span>
+                        </div>
+                        <span class="text-[10px] text-brand-accent uppercase tracking-widest font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-terminal text-[9px]"></i> LIVE CLI
+                        </span>
+                    </div>
+
+                    <!-- Verified SOHAIB ASCII Art Banner -->
+                    <pre class="text-brand-accent text-[9px] sm:text-[11px] leading-tight font-bold overflow-x-auto py-1 select-none">
+  ____   ___  _   _    _    ___ ____  
+ / ___| / _ \| | | |  / \  |_ _| __ ) 
+ \___ \| | | | |_| | / _ \  | ||  _ \ 
+  ___) | |_| |  _  |/ ___ \ | || |_) |
+ |____/ \___/|_| |_/_/   \_\___|____/ 
+                    </pre>
+
+                    <!-- Terminal Output Scroll Container -->
+                    <div id="cli-output" class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                        <p class="text-brand-accent">&gt; Welcome to Sk Md Sohaib's Interactive Shell! Type commands or click tags below.</p>
+                    </div>
+
+                    <!-- Dynamic Command Quick Launch Buttons -->
+                    <div class="flex flex-wrap gap-1.5 pt-2 border-t border-brand-lightgray/30 text-[10px]">
+                        <span class="text-brand-textMuted/70 self-center">Quick Run:</span>
+                        <button onclick="runCliCommand('help')" class="px-2 py-0.5 rounded bg-brand-lightgray/50 hover:bg-brand-accent/20 hover:text-brand-accent transition-all text-white">help</button>
+                        <button onclick="runCliCommand('about')" class="px-2 py-0.5 rounded bg-brand-lightgray/50 hover:bg-brand-accent/20 hover:text-brand-accent transition-all text-white">about</button>
+                        <button onclick="runCliCommand('skills')" class="px-2 py-0.5 rounded bg-brand-lightgray/50 hover:bg-brand-accent/20 hover:text-brand-accent transition-all text-white">skills</button>
+                        <button onclick="runCliCommand('work')" class="px-2 py-0.5 rounded bg-brand-lightgray/50 hover:bg-brand-accent/20 hover:text-brand-accent transition-all text-white">work</button>
+                        <button onclick="runCliCommand('pricing')" class="px-2 py-0.5 rounded bg-brand-lightgray/50 hover:bg-brand-accent/20 hover:text-brand-accent transition-all text-white">pricing</button>
+                        <button onclick="runCliCommand('clear')" class="px-2 py-0.5 rounded bg-brand-lightgray/50 hover:bg-rose-500/20 hover:text-rose-400 transition-all text-brand-textMuted">clear</button>
+                    </div>
+
+                    <!-- Interactive CLI Input Field -->
+                    <form id="cli-form" class="flex items-center gap-2 pt-1">
+                        <span class="text-brand-accent font-bold">visitor@sohaib:~$</span>
+                        <input type="text" id="cli-input" placeholder="type 'help' or 'about'..." class="flex-grow bg-transparent border-none text-white focus:outline-none font-mono text-xs placeholder:text-brand-textMuted/50">
+                    </form>
+                </div>
+
+                <!-- Hero Actions -->
+                <div class="flex flex-wrap gap-4 pt-2 font-mono text-xs">
+                    <a href="#projects" class="px-5 py-3 rounded-lg btn-shimmer text-brand-black font-bold hover:scale-105 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)]">
+                        <i class="fa-regular fa-folder-open"></i> View Projects
+                    </a>
+                    <button onclick="navigateTo('pricing')" class="px-5 py-3 rounded-lg border border-brand-accent/50 text-brand-accent hover:bg-brand-accent/10 hover:border-brand-accent hover:scale-105 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-tags"></i> Services &amp; Pricing
+                    </button>
+                    <a href="#contact" class="px-5 py-3 rounded-lg border border-brand-lightgray text-brand-textMuted hover:border-brand-accent hover:text-white hover:scale-105 transition-all flex items-center gap-2">
+                        <i class="fa-regular fa-envelope"></i> Contact Me
+                    </a>
+                </div>
+            </section>
+
+            <!-- 01. About Me -->
+            <section id="about" class="py-16 px-6 max-w-4xl mx-auto space-y-8 reveal">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-2xl font-bold font-sans text-white flex items-center gap-2">
+                        <span class="text-brand-accent font-mono text-base font-normal">01.</span> About Me
+                    </h2>
+                    <div class="h-[1px] bg-brand-lightgray/50 flex-grow"></div>
+                </div>
+
+                <!-- Interactive Stats Counter Bar -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
+                    <div class="bg-brand-dark p-4 rounded-xl border border-brand-lightgray text-center tilt-card hover:border-brand-accent transition-all">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-brand-accent counter-val" data-target="100">0</div>
+                        <div class="text-[11px] text-brand-textMuted mt-1">Git Commits</div>
+                    </div>
+                    <div class="bg-brand-dark p-4 rounded-xl border border-brand-lightgray text-center tilt-card hover:border-brand-accent transition-all">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 counter-val" data-target="10">0</div>
+                        <div class="text-[11px] text-brand-textMuted mt-1">Projects Built</div>
+                    </div>
+                    <div class="bg-brand-dark p-4 rounded-xl border border-brand-lightgray text-center tilt-card hover:border-brand-accent transition-all">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-teal-300 counter-val" data-target="100">0</div>
+                        <div class="text-[11px] text-brand-textMuted mt-1">% Dedication</div>
+                    </div>
+                    <div class="bg-brand-dark p-4 rounded-xl border border-brand-lightgray text-center tilt-card hover:border-brand-accent transition-all">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-brand-accent">2026</div>
+                        <div class="text-[11px] text-brand-textMuted mt-1">Active Year</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                    <div class="md:col-span-7 space-y-4 text-brand-textMuted text-sm sm:text-base leading-relaxed">
+                        <p>
+                            Hello! I am <span class="text-white font-bold">Sk Md Sohaib</span>, a driven software developer focused on building scalable, real-world solutions. My core emphasis is mastering <span class="text-brand-accent font-mono font-semibold">Python</span> and engineering high-impact web and automation platforms.
+                        </p>
+                        <p>
+                            I lean strongly toward a <span class="text-white">clean &amp; purposeful philosophy</span> when architecting applications. I prioritize clean code, user-centric interfaces, and robust execution.
+                        </p>
+                        <p>
+                            Based in Burdwan, West Bengal, I actively combine academic studies with hands-on software development, continuous git workflows, and modern web frameworks.
+                        </p>
+                    </div>
+
+                    <div class="md:col-span-5 bg-brand-dark p-6 rounded-xl border border-brand-lightgray space-y-4 font-mono text-xs tilt-card hover:border-brand-accent/60 transition-all shadow-lg animate-float">
+                        <div class="text-brand-accent uppercase tracking-wider font-bold flex items-center justify-between">
+                            <span>Developer Highlights</span>
+                            <i class="fa-solid fa-code text-brand-accent"></i>
+                        </div>
+                        <ul class="space-y-3 text-brand-textMuted">
+                            <li class="flex items-start gap-2"><span class="text-brand-accent font-bold">&gt;</span> Python &amp; Automation Developer</li>
+                            <li class="flex items-start gap-2"><span class="text-brand-accent font-bold">&gt;</span> Building real-world web applications</li>
+                            <li class="flex items-start gap-2"><span class="text-brand-accent font-bold">&gt;</span> Proficient with Git &amp; GitHub workflows</li>
+                            <li class="flex items-start gap-2"><span class="text-brand-accent font-bold">&gt;</span> Creator of Solo Animator Hiring Platform</li>
+                            <li class="flex items-start gap-2"><span class="text-brand-accent font-bold">&gt;</span> St. Xavier's College Student</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 02. Featured Work -->
+            <section id="projects" class="py-16 px-6 max-w-4xl mx-auto space-y-8 reveal">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-2xl font-bold font-sans text-white">
+                        <span class="text-brand-accent font-mono text-base font-normal">02.</span> Featured Work
+                    </h2>
+                    <div class="h-[1px] bg-brand-lightgray/50 flex-grow"></div>
+                </div>
+
+                <!-- PROJECT 1: Solo Animator -->
+                <article class="bg-brand-dark rounded-xl border border-brand-lightgray p-6 sm:p-8 space-y-6 tilt-card hover:border-brand-accent/70 hover:shadow-[0_0_35px_rgba(16,185,129,0.2)] transition-all relative overflow-hidden group">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-accent/5 rounded-full blur-2xl group-hover:bg-brand-accent/15 transition-all"></div>
+
+                    <div class="flex items-center justify-between font-mono text-xs">
+                        <span class="text-brand-accent tracking-wider flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span> PRODUCTION LIVE
+                        </span>
+                        <div class="flex gap-3 text-brand-textMuted">
+                            <a href="https://github.com/skmd-sohaib" target="_blank" class="hover:text-white hover:scale-125 transition-all"><i class="fa-brands fa-github text-base"></i></a>
+                            <a href="https://soloanimator.vercel.app/animators" target="_blank" class="hover:text-white hover:scale-125 transition-all"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="font-mono text-xs text-brand-accent uppercase tracking-widest">Featured Web App</div>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white">Solo Animator</h3>
+                        <p class="text-brand-textMuted text-sm leading-relaxed max-w-2xl">
+                            A high-performance hiring platform built exclusively for animators and digital creators. It streamlines talent sourcing, allowing clients to search portfolios, check availability, and connect directly with creative professionals.
+                        </p>
+                    </div>
+
+                    <!-- API Response Preview Box -->
+                    <div class="bg-brand-black p-4 rounded-lg border border-brand-lightgray/60 font-mono text-xs text-brand-textMuted space-y-2 scanline-box">
+                        <div class="flex justify-between text-[11px] text-brand-textMuted/60">
+                            <span>API Status (soloanimator.vercel.app)</span>
+                            <span class="text-emerald-400 font-bold">200 OK</span>
+                        </div>
+                        <pre class="text-emerald-300 text-[11px] sm:text-xs overflow-x-auto">
+{
+  "creator": "Sk Md Sohaib",
+  "project": "Solo Animator",
+  "endpoint": "/animators",
+  "status": "Production Live"
+}
+                        </pre>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 font-mono text-xs">
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">NextJS / React</span>
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">TailwindCSS</span>
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">Vercel</span>
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">API Integration</span>
+                    </div>
+
+                    <div>
+                        <a href="https://soloanimator.vercel.app/animators" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-mono text-brand-accent hover:underline hover:translate-x-1 transition-transform font-semibold">
+                            Launch Live Platform →
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROJECT 2: QR GenZ -->
+                <article class="bg-brand-dark rounded-xl border border-brand-lightgray p-6 sm:p-8 space-y-6 tilt-card hover:border-brand-accent/70 hover:shadow-[0_0_35px_rgba(16,185,129,0.2)] transition-all relative overflow-hidden group">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-accent/5 rounded-full blur-2xl group-hover:bg-brand-accent/15 transition-all"></div>
+
+                    <div class="flex items-center justify-between font-mono text-xs">
+                        <span class="text-brand-accent tracking-wider flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span> PRODUCTION LIVE
+                        </span>
+                        <div class="flex gap-3 text-brand-textMuted">
+                            <a href="https://github.com/skmd-sohaib" target="_blank" class="hover:text-white hover:scale-125 transition-all"><i class="fa-brands fa-github text-base"></i></a>
+                            <a href="https://theqrgenz.vercel.app/" target="_blank" class="hover:text-white hover:scale-125 transition-all"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="font-mono text-xs text-brand-accent uppercase tracking-widest">Utility Web App</div>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white">The QR GenZ</h3>
+                        <p class="text-brand-textMuted text-sm leading-relaxed max-w-2xl">
+                            A fast, sleek, and customizable QR code generator web application. Generate instant, high-quality QR codes for links, text, and data with a seamless and modern user interface.
+                        </p>
+                    </div>
+
+                    <!-- API Response Preview Box -->
+                    <div class="bg-brand-black p-4 rounded-lg border border-brand-lightgray/60 font-mono text-xs text-brand-textMuted space-y-2 scanline-box">
+                        <div class="flex justify-between text-[11px] text-brand-textMuted/60">
+                            <span>Status (theqrgenz.vercel.app)</span>
+                            <span class="text-emerald-400 font-bold">200 OK</span>
+                        </div>
+                        <pre class="text-emerald-300 text-[11px] sm:text-xs overflow-x-auto">
+{
+  "creator": "Sk Md Sohaib",
+  "project": "The QR GenZ",
+  "type": "Web Utility Tool",
+  "status": "Online & Live"
+}
+                        </pre>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 font-mono text-xs">
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">Frontend Dev</span>
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">UI/UX</span>
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">Vercel</span>
+                        <span class="px-2.5 py-1 bg-brand-gray rounded border border-brand-lightgray/40 text-brand-textMuted hover:border-brand-accent hover:text-white transition-all">Web Tools</span>
+                    </div>
+
+                    <div>
+                        <a href="https://theqrgenz.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-mono text-brand-accent hover:underline hover:translate-x-1 transition-transform font-semibold">
+                            Launch Live Platform →
+                        </a>
+                    </div>
+                </article>
+            </section>
+
+            <!-- 03. Education & Career Goals -->
+            <section id="education" class="py-16 px-6 max-w-4xl mx-auto space-y-8 reveal">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-2xl font-bold font-sans text-white">
+                        <span class="text-brand-accent font-mono text-base font-normal">03.</span> Education &amp; Vision
+                    </h2>
+                    <div class="h-[1px] bg-brand-lightgray/50 flex-grow"></div>
+                </div>
+
+                <div class="relative border-l-2 border-brand-accent/30 pl-6 ml-3 space-y-8">
+                    <!-- Milestone 1 -->
+                    <div class="relative space-y-2 group">
+                        <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-brand-black border-2 border-brand-accent group-hover:scale-125 group-hover:bg-brand-accent transition-all"></div>
+                        <div class="font-mono text-xs text-brand-accent uppercase tracking-widest">Graduation (In Progress)</div>
+                        <h3 class="text-xl font-bold text-white">St. Xavier's College</h3>
+                        <p class="text-brand-textMuted text-xs font-mono">Burdwan, West Bengal</p>
+                        <p class="text-brand-textMuted text-sm pt-1 leading-relaxed">
+                            Pursuing higher studies in Burdwan while actively preparing for a high-impact career as a Software Engineer through real-world software project development.
+                        </p>
+                    </div>
+
+                    <!-- Milestone 2 -->
+                    <div class="relative space-y-2 group">
+                        <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-brand-black border-2 border-emerald-400 group-hover:scale-125 group-hover:bg-emerald-400 transition-all"></div>
+                        <div class="font-mono text-xs text-emerald-400 uppercase tracking-widest">Career Trajectory</div>
+                        <h3 class="text-xl font-bold text-white">Software Engineer Target</h3>
+                        <p class="text-brand-textMuted text-sm leading-relaxed">
+                            Targeting full-stack software development, automated system architecture, AI tools integration, and building reliable digital solutions for global clients.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 04. Tech Stack -->
+            <section id="tech" class="py-16 px-6 max-w-4xl mx-auto space-y-8 reveal">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-2xl font-bold font-sans text-white">
+                        <span class="text-brand-accent font-mono text-base font-normal">04.</span> Tech Stack
+                    </h2>
+                    <div class="h-[1px] bg-brand-lightgray/50 flex-grow"></div>
+                </div>
+
+                <!-- Interactive Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2 font-mono text-xs" id="tech-filters">
+                    <button onclick="filterTech('all')" class="tech-filter-btn px-3 py-1.5 rounded bg-brand-accent/20 text-brand-accent border border-brand-accent font-semibold transition-all">All Skills</button>
+                    <button onclick="filterTech('core')" class="tech-filter-btn px-3 py-1.5 rounded bg-brand-dark text-brand-textMuted border border-brand-lightgray hover:border-brand-accent transition-all">Core Languages</button>
+                    <button onclick="filterTech('framework')" class="tech-filter-btn px-3 py-1.5 rounded bg-brand-dark text-brand-textMuted border border-brand-lightgray hover:border-brand-accent transition-all">Frameworks &amp; Web</button>
+                    <button onclick="filterTech('tools')" class="tech-filter-btn px-3 py-1.5 rounded bg-brand-dark text-brand-textMuted border border-brand-lightgray hover:border-brand-accent transition-all">Dev Tools</button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 font-mono text-xs" id="tech-grid">
+                    <div class="tech-card core bg-brand-dark p-4 rounded-xl border border-brand-lightgray space-y-3 tilt-card hover:border-brand-accent transition-all">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-brands fa-python text-2xl text-brand-accent"></i>
+                            <div>
+                                <div class="font-bold text-white">Python</div>
+                                <div class="text-brand-textMuted text-[11px]">Core Language</div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-brand-black h-1.5 rounded-full overflow-hidden border border-brand-lightgray/50">
+                            <div class="skill-bar-fill h-full bg-brand-accent" data-level="88%"></div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card core bg-brand-dark p-4 rounded-xl border border-brand-lightgray space-y-3 tilt-card hover:border-emerald-400 transition-all">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-c text-2xl text-emerald-400 font-bold"></i>
+                            <div>
+                                <div class="font-bold text-white">C Language</div>
+                                <div class="text-brand-textMuted text-[11px]">System Concepts</div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-brand-black h-1.5 rounded-full overflow-hidden border border-brand-lightgray/50">
+                            <div class="skill-bar-fill h-full bg-emerald-400" data-level="75%"></div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card framework bg-brand-dark p-4 rounded-xl border border-brand-lightgray space-y-3 tilt-card hover:border-brand-accent transition-all">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-code text-2xl text-brand-accent"></i>
+                            <div>
+                                <div class="font-bold text-white">HTML / CSS / JS</div>
+                                <div class="text-brand-textMuted text-[11px]">Web Frontend</div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-brand-black h-1.5 rounded-full overflow-hidden border border-brand-lightgray/50">
+                            <div class="skill-bar-fill h-full bg-brand-accent" data-level="90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card framework bg-brand-dark p-4 rounded-xl border border-brand-lightgray space-y-3 tilt-card hover:border-emerald-400 transition-all">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-mobile-screen text-2xl text-emerald-400"></i>
+                            <div>
+                                <div class="font-bold text-white">Flutter</div>
+                                <div class="text-brand-textMuted text-[11px]">Cross-Platform</div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-brand-black h-1.5 rounded-full overflow-hidden border border-brand-lightgray/50">
+                            <div class="skill-bar-fill h-full bg-emerald-400" data-level="70%"></div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card tools bg-brand-dark p-4 rounded-xl border border-brand-lightgray space-y-3 tilt-card hover:border-amber-500 transition-all">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-brands fa-git-alt text-2xl text-amber-500"></i>
+                            <div>
+                                <div class="font-bold text-white">Git &amp; GitHub</div>
+                                <div class="text-brand-textMuted text-[11px]">Version Control</div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-brand-black h-1.5 rounded-full overflow-hidden border border-brand-lightgray/50">
+                            <div class="skill-bar-fill h-full bg-amber-500" data-level="85%"></div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card framework bg-brand-dark p-4 rounded-xl border border-brand-lightgray space-y-3 tilt-card hover:border-purple-400 transition-all">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-wand-magic-sparkles text-2xl text-purple-400 animate-pulse"></i>
+                            <div>
+                                <div class="font-bold text-white">Vibe Coding &amp; AI</div>
+                                <div class="text-brand-textMuted text-[11px]">AI Workflow</div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-brand-black h-1.5 rounded-full overflow-hidden border border-brand-lightgray/50">
+                            <div class="skill-bar-fill h-full bg-purple-400" data-level="92%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 05. Contact -->
+            <section id="contact" class="py-16 px-6 max-w-4xl mx-auto space-y-8 reveal">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-2xl font-bold font-sans text-white">
+                        <span class="text-brand-accent font-mono text-base font-normal">05.</span> Say Hello!
+                    </h2>
+                    <div class="h-[1px] bg-brand-lightgray/50 flex-grow"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div class="space-y-4">
+                        <p class="text-brand-textMuted text-sm leading-relaxed">
+                            Whether you have a software project enquiry, want to discuss automation tools, or just want to connect, feel free to drop a message!
+                        </p>
+                        
+                        <a href="mailto:skmdsohaib.dev@gmail.com" class="p-3 bg-brand-dark border border-brand-lightgray rounded-lg text-brand-textMuted hover:border-brand-accent hover:text-white transition-all flex items-center justify-between group">
+                            <span class="flex items-center gap-2 font-mono text-xs"><i class="fa-regular fa-envelope text-brand-accent"></i> skmdsohaib.dev@gmail.com</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] text-brand-accent group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+
+                        <a href="https://github.com/skmd-sohaib" target="_blank" class="p-3 bg-brand-dark border border-brand-lightgray rounded-lg text-brand-textMuted hover:border-brand-accent hover:text-white transition-all flex items-center justify-between">
+                            <span class="flex items-center gap-2 font-mono text-xs"><i class="fa-brands fa-github text-base"></i> github/skmd-sohaib</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+
+                        <a href="https://youtube.com/@sohaibframes" target="_blank" class="p-3 bg-brand-dark border border-brand-lightgray rounded-lg text-brand-textMuted hover:border-brand-accent hover:text-white transition-all flex items-center justify-between">
+                            <span class="flex items-center gap-2 font-mono text-xs"><i class="fa-brands fa-youtube text-base"></i> youtube/@sohaibframes</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Clean Terminal Mail Interface -->
+                    <form id="homeContactForm" action="https://formspree.io/f/xjgngqvo" method="POST" class="bg-brand-dark p-6 rounded-xl border border-brand-lightgray font-mono text-xs space-y-4 shadow-xl">
+                        <div class="flex items-center gap-2 border-b border-brand-lightgray/40 pb-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                            <span class="text-brand-textMuted/70 text-[11px] ml-1">Send Direct Shell Mail</span>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-brand-textMuted">sender_name =</label>
+                            <input type="text" name="name" required placeholder='"Your Name"' class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-brand-textMuted">sender_email =</label>
+                            <input type="email" name="email" required placeholder='"email@example.com"' class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-brand-textMuted">message_payload =</label>
+                            <textarea name="message" rows="4" required placeholder='"""Type your message here ..."""' class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent"></textarea>
+                        </div>
+
+                        <button type="submit" id="homeFormBtn" class="w-full py-3 bg-brand-accent text-brand-black font-bold rounded-lg hover:bg-emerald-400 transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                            &gt;_ run send_message()
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ================= PAGE 2: PRICING & SERVICE PAGE WITH INTERACTIVE ESTIMATOR ================= -->
+        <div id="page-pricing" class="page-view hidden py-8 px-6 max-w-5xl mx-auto space-y-12">
+            
+            <!-- Page Header Bar -->
+            <div class="flex items-center justify-between border-b border-brand-lightgray/50 pb-4">
+                <button onclick="navigateTo('home')" class="px-4 py-2 rounded-lg bg-brand-dark border border-brand-lightgray text-brand-accent hover:border-brand-accent font-mono text-xs transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>← Back to Portfolio</span>
+                </button>
+                <div class="font-mono text-xs text-brand-textMuted">
+                    Path: <span class="text-brand-accent">/pricing</span>
+                </div>
+            </div>
+
+            <!-- Header Content -->
+            <div class="text-center space-y-3">
+                <div class="font-mono text-xs text-brand-accent uppercase tracking-widest">Service Catalog &amp; Custom Quote Builder</div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Simple Pricing. Clear Scope.</h2>
+                <p class="text-brand-textMuted text-sm sm:text-base max-w-2xl mx-auto font-mono">
+                    Select a service package below or use the interactive custom quote calculator to build your setup.
+                </p>
+
+                <!-- Sub-Navigation Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 pt-4 font-mono text-xs" id="pricing-tabs">
+                    <button onclick="switchPricingView('overview')" id="tab-overview" class="pricing-tab-btn active px-3.5 py-2 rounded-lg border border-brand-lightgray text-brand-textMuted hover:border-brand-accent transition-all">
+                        🌐 Overview
+                    </button>
+                    <button onclick="switchPricingView('estimator')" id="tab-estimator" class="pricing-tab-btn px-3.5 py-2 rounded-lg border border-brand-lightgray text-brand-textMuted hover:border-brand-accent transition-all">
+                        ⚡ Interactive Calculator
+                    </button>
+                    <button onclick="switchPricingView('website')" id="tab-website" class="pricing-tab-btn px-3.5 py-2 rounded-lg border border-brand-lightgray text-brand-textMuted hover:border-brand-accent transition-all">
+                        💻 Website Dev
+                    </button>
+                    <button onclick="switchPricingView('whatsapp')" id="tab-whatsapp" class="pricing-tab-btn px-3.5 py-2 rounded-lg border border-brand-lightgray text-brand-textMuted hover:border-brand-accent transition-all">
+                        💬 WhatsApp Auto
+                    </button>
+                    <button onclick="switchPricingView('bundles')" id="tab-bundles" class="pricing-tab-btn px-3.5 py-2 rounded-lg border border-brand-lightgray text-brand-textMuted hover:border-brand-accent transition-all">
+                        🚀 Bundles
+                    </button>
+                </div>
+            </div>
+
+            <!-- OVERVIEW SUB-VIEW -->
+            <div id="view-overview" class="pricing-view space-y-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-brand-dark border border-brand-lightgray p-6 rounded-xl flex flex-col justify-between space-y-4 tilt-card hover:border-brand-accent transition-all">
+                        <div class="space-y-3">
+                            <div class="text-3xl">🌐</div>
+                            <h3 class="text-lg font-bold text-white">Website Development</h3>
+                            <div class="font-mono text-brand-accent font-semibold text-base">Starting from ₹3,999</div>
+                            <p class="text-xs text-brand-textMuted leading-relaxed">Custom, responsive websites with hosting options up to 25 GB SSD, domain, SEO & SSL.</p>
+                        </div>
+                        <button onclick="switchPricingView('website')" class="w-full py-2 rounded font-mono text-xs border border-brand-accent/30 text-brand-accent hover:bg-brand-accent/10 transition-all">
+                            View Detailed Plans →
+                        </button>
+                    </div>
+
+                    <div class="bg-brand-dark border border-brand-lightgray p-6 rounded-xl flex flex-col justify-between space-y-4 tilt-card hover:border-brand-accent transition-all">
+                        <div class="space-y-3">
+                            <div class="text-3xl">💬</div>
+                            <h3 class="text-lg font-bold text-white">WhatsApp Automation</h3>
+                            <div class="font-mono text-brand-accent font-semibold text-base">Starting from ₹4,999</div>
+                            <p class="text-xs text-brand-textMuted leading-relaxed">Automate FAQs, lead qualification, off-hour replies, and real-time Google Sheets sync.</p>
+                        </div>
+                        <button onclick="switchPricingView('whatsapp')" class="w-full py-2 rounded font-mono text-xs border border-brand-accent/30 text-brand-accent hover:bg-brand-accent/10 transition-all">
+                            View WhatsApp Plans →
+                        </button>
+                    </div>
+
+                    <div class="bg-brand-dark border border-brand-lightgray p-6 rounded-xl flex flex-col justify-between space-y-4 tilt-card hover:border-brand-accent transition-all">
+                        <div class="space-y-3">
+                            <div class="text-3xl">🤖</div>
+                            <h3 class="text-lg font-bold text-white">AI Automation</h3>
+                            <div class="font-mono text-brand-accent font-semibold text-base">Starting from ₹19,999+</div>
+                            <p class="text-xs text-brand-textMuted leading-relaxed">Contextual AI knowledge bots trained on your business docs with multi-platform flows.</p>
+                        </div>
+                        <button onclick="switchPricingView('estimator')" class="w-full py-2 rounded font-mono text-xs border border-brand-accent/30 text-brand-accent hover:bg-brand-accent/10 transition-all">
+                            Calculate AI Quote →
+                        </button>
+                    </div>
+
+                    <div class="bg-brand-dark border border-brand-lightgray p-6 rounded-xl flex flex-col justify-between space-y-4 tilt-card hover:border-brand-accent transition-all">
+                        <div class="space-y-3">
+                            <div class="text-3xl">🚀</div>
+                            <h3 class="text-lg font-bold text-white">Website + Automation</h3>
+                            <div class="font-mono text-brand-accent font-semibold text-base">Starting from ₹22,999</div>
+                            <p class="text-xs text-brand-textMuted leading-relaxed">All-in-one package: 10GB SSD Hosting + Domain + Website + WhatsApp Lead Sync.</p>
+                        </div>
+                        <button onclick="switchPricingView('bundles')" class="w-full py-2 rounded font-mono text-xs border border-brand-accent/30 text-brand-accent hover:bg-brand-accent/10 transition-all">
+                            View Bundles →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE ESTIMATOR SUB-VIEW -->
+            <div id="view-estimator" class="pricing-view hidden space-y-8">
+                <div class="bg-brand-dark p-6 sm:p-8 rounded-xl border border-brand-lightgray space-y-6 font-mono text-xs">
+                    <div class="border-b border-brand-lightgray/50 pb-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Interactive Custom Package Builder</h3>
+                            <p class="text-brand-textMuted text-[11px]">Toggle options to estimate total project cost in real time</p>
+                        </div>
+                        <div class="bg-brand-black px-4 py-2 rounded border border-brand-accent/50 text-right">
+                            <span class="text-[10px] text-brand-textMuted block">Estimated Investment</span>
+                            <span id="est-total-price" class="text-xl font-bold text-brand-accent">₹3,999</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="bg-brand-black p-4 rounded border border-brand-lightgray flex items-center justify-between cursor-pointer hover:border-brand-accent transition-all">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="opt-website" checked onchange="calculateEstimate()" class="accent-emerald-500 w-4 h-4">
+                                <div>
+                                    <div class="font-bold text-white">Base Website Development</div>
+                                    <div class="text-[10px] text-brand-textMuted">Responsive custom website</div>
+                                </div>
+                            </div>
+                            <span class="text-brand-accent font-bold">+₹3,999</span>
+                        </label>
+
+                        <label class="bg-brand-black p-4 rounded border border-brand-lightgray flex items-center justify-between cursor-pointer hover:border-brand-accent transition-all">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="opt-domain-hosting" onchange="calculateEstimate()" class="accent-emerald-500 w-4 h-4">
+                                <div>
+                                    <div class="font-bold text-white">Domain &amp; Hosting (1 Yr)</div>
+                                    <div class="text-[10px] text-brand-textMuted">Includes SSL &amp; Setup</div>
+                                </div>
+                            </div>
+                            <span class="text-brand-accent font-bold">+₹3,000</span>
+                        </label>
+
+                        <label class="bg-brand-black p-4 rounded border border-brand-lightgray flex items-center justify-between cursor-pointer hover:border-brand-accent transition-all">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="opt-whatsapp" onchange="calculateEstimate()" class="accent-emerald-500 w-4 h-4">
+                                <div>
+                                    <div class="font-bold text-white">WhatsApp Bot Automation</div>
+                                    <div class="text-[10px] text-brand-textMuted">FAQ + Auto Lead Sync</div>
+                                </div>
+                            </div>
+                            <span class="text-brand-accent font-bold">+₹4,999</span>
+                        </label>
+
+                        <label class="bg-brand-black p-4 rounded border border-brand-lightgray flex items-center justify-between cursor-pointer hover:border-brand-accent transition-all">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="opt-ai" onchange="calculateEstimate()" class="accent-emerald-500 w-4 h-4">
+                                <div>
+                                    <div class="font-bold text-white">Custom AI Knowledge Bot</div>
+                                    <div class="text-[10px] text-brand-textMuted">AI Support &amp; Lead Agent</div>
+                                </div>
+                            </div>
+                            <span class="text-brand-accent font-bold">+₹10,000</span>
+                        </label>
+                    </div>
+
+                    <button onclick="applyEstimateToForm()" class="w-full py-3 bg-brand-accent text-brand-black font-bold rounded hover:bg-emerald-400 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> Lock Estimate &amp; Request Proposal →
+                    </button>
+                </div>
+            </div>
+
+            <!-- WEBSITE SUB-VIEW -->
+            <div id="view-website" class="pricing-view hidden space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Website Plan 1 -->
+                    <div class="bg-brand-dark p-6 rounded-xl border border-brand-lightgray flex flex-col justify-between space-y-6 tilt-card hover:border-brand-accent transition-all">
+                        <div class="space-y-4 font-mono text-xs">
+                            <div class="space-y-1">
+                                <h4 class="text-base font-bold text-white">Website Only</h4>
+                                <div class="text-2xl text-brand-accent font-extrabold">₹3,999</div>
+                                <p class="text-brand-textMuted text-[11px] italic">For clients who already own domain &amp; hosting.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">What's Included:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Up to 5 Pages Custom Layout</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Mobile &amp; Desktop Responsive</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> WhatsApp Direct Contact Button</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Lead Inquiry Form Setup</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Complete Source Code Handover</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> 1 Revision Round</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 7 Days Free Tech Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('Website Only (₹3,999)')" class="w-full py-2.5 bg-brand-accent/20 border border-brand-accent/50 text-brand-accent font-mono text-xs font-bold rounded hover:bg-brand-accent hover:text-brand-black transition-all">Select Plan →</button>
+                    </div>
+
+                    <!-- Website Plan 2 -->
+                    <div class="bg-brand-dark p-6 rounded-xl border border-brand-lightgray flex flex-col justify-between space-y-6 tilt-card hover:border-brand-accent transition-all">
+                        <div class="space-y-4 font-mono text-xs">
+                            <div class="space-y-1">
+                                <h4 class="text-base font-bold text-white">Website Starter</h4>
+                                <div class="text-2xl text-brand-accent font-extrabold">₹6,999</div>
+                                <p class="text-brand-textMuted text-[11px] italic">Essential website setup with client's server.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">What's Included:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> 5 to 7 Pages Structured Design</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Fully Responsive (Mobile, Tablet, Desktop)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Basic SEO Optimization (Meta &amp; Headings)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Google Maps Embed &amp; Social Links</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Contact Lead Form Integration</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> 2 Revision Rounds</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 15 Days Free Tech Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('Website Starter (₹6,999)')" class="w-full py-2.5 bg-brand-accent/20 border border-brand-accent/50 text-brand-accent font-mono text-xs font-bold rounded hover:bg-brand-accent hover:text-brand-black transition-all">Select Plan →</button>
+                    </div>
+
+                    <!-- Website Plan 3 (POPULAR) -->
+                    <div class="bg-brand-dark p-6 rounded-xl border-2 border-brand-accent flex flex-col justify-between space-y-6 tilt-card shadow-[0_0_25px_rgba(16,185,129,0.15)] relative overflow-hidden">
+                        <div class="absolute top-3 right-3 bg-brand-accent text-brand-black text-[9px] font-bold px-2 py-0.5 rounded uppercase font-mono">⭐ Most Popular</div>
+                        <div class="space-y-4 font-mono text-xs">
+                            <div class="space-y-1">
+                                <h4 class="text-base font-bold text-white">Website Business</h4>
+                                <div class="text-2xl text-brand-accent font-extrabold">₹14,999</div>
+                                <p class="text-brand-textMuted text-[11px] italic">Complete all-in-one web launch package.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">What's Included:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-white font-semibold"><i class="fa-solid fa-globe text-brand-accent mt-0.5"></i> <strong>Domain Included:</strong> 1 Year (.com / .in)</li>
+                                    <li class="flex items-start gap-2 text-white font-semibold"><i class="fa-solid fa-server text-brand-accent mt-0.5"></i> <strong>10 GB Fast SSD Cloud Hosting</strong> (1 Yr)</li>
+                                    <li class="flex items-start gap-2 text-white font-semibold"><i class="fa-solid fa-lock text-brand-accent mt-0.5"></i> <strong>Free SSL Certificate</strong> (HTTPS Security)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Unlimited Bandwidth &amp; High Speed</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Custom Business Multi-Page Layout</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Basic SEO + Google Analytics Setup</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> WhatsApp Direct &amp; Contact Form</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Content Assembly Assistance</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> 3 Revision Rounds</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 30 Days Free Tech Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('Website Business (₹14,999)')" class="w-full py-2.5 bg-brand-accent text-brand-black font-mono text-xs font-bold rounded hover:bg-emerald-400 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">Select Plan →</button>
+                    </div>
+
+                    <!-- Website Plan 4 -->
+                    <div class="bg-brand-dark p-6 rounded-xl border border-brand-lightgray flex flex-col justify-between space-y-6 tilt-card hover:border-brand-accent transition-all">
+                        <div class="space-y-4 font-mono text-xs">
+                            <div class="space-y-1">
+                                <h4 class="text-base font-bold text-white">Website Premium</h4>
+                                <div class="text-2xl text-brand-accent font-extrabold">₹24,999</div>
+                                <p class="text-brand-textMuted text-[11px] italic">For brands seeking peak speed &amp; SEO ranking.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">What's Included:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-white font-semibold"><i class="fa-solid fa-globe text-brand-accent mt-0.5"></i> <strong>Domain Included:</strong> 1 Year (.com / .in)</li>
+                                    <li class="flex items-start gap-2 text-white font-semibold"><i class="fa-solid fa-server text-brand-accent mt-0.5"></i> <strong>25 GB NVMe High-Speed Hosting</strong> (1 Yr)</li>
+                                    <li class="flex items-start gap-2 text-white font-semibold"><i class="fa-solid fa-shield-halved text-brand-accent mt-0.5"></i> <strong>Free SSL + Security Hardening</strong></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Unmetered Premium Bandwidth</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Premium Custom UX/UI Layout</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Google Search Console Indexing</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Google Analytics 4 Event Tracking</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Speed Tuning (90+ PageSpeed Score)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> 5 Revision Rounds</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 90 Days Priority Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('Website Premium (₹24,999)')" class="w-full py-2.5 bg-brand-accent/20 border border-brand-accent/50 text-brand-accent font-mono text-xs font-bold rounded hover:bg-brand-accent hover:text-brand-black transition-all">Select Plan →</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- WHATSAPP SUB-VIEW -->
+            <div id="view-whatsapp" class="pricing-view hidden space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
+                    
+                    <div class="bg-brand-dark p-6 rounded-xl border border-brand-lightgray space-y-5 tilt-card hover:border-brand-accent transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="space-y-1">
+                                <h4 class="text-lg font-bold text-white">WhatsApp Starter</h4>
+                                <div class="text-2xl text-brand-accent font-extrabold">₹4,999</div>
+                                <p class="text-brand-textMuted text-[11px]">Ideal for automated FAQ replies &amp; off-hour lead messaging.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">What's Included:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Automatic Keyword Trigger Responses</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> FAQ Automation (Hours, Location, Price List)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Business Hours vs. Off-Hours Logic</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Basic Lead Capture (Name, Phone, Inquiry)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Instant Owner Email / Push Notification</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 7 Days Technical Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('WhatsApp Starter (₹4,999)')" class="w-full py-2.5 bg-brand-accent/20 border border-brand-accent/50 text-brand-accent font-bold rounded hover:bg-brand-accent hover:text-brand-black transition-all">Select Plan →</button>
+                    </div>
+
+                    <div class="bg-brand-dark p-6 rounded-xl border-2 border-brand-accent space-y-5 tilt-card shadow-[0_0_25px_rgba(16,185,129,0.15)] flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="space-y-1">
+                                <div class="text-[9px] text-brand-accent font-bold uppercase tracking-wider">⭐ Most Popular</div>
+                                <h4 class="text-lg font-bold text-white">WhatsApp Business Pro</h4>
+                                <div class="text-2xl text-brand-accent font-extrabold">₹9,999</div>
+                                <p class="text-brand-textMuted text-[11px]">For active businesses needing multi-step lead qualification &amp; CRM sync.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">What's Included:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> All Starter Plan Features Included</li>
+                                    <li class="flex items-start gap-2 text-white font-semibold"><i class="fa-solid fa-table text-brand-accent mt-0.5"></i> <strong>Live Google Sheets Lead Sync</strong> (Real-time)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Multi-Step Qualification &amp; Booking Trees</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Automatic Follow-Up Reminder Sequences</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Human Operator Handoff Mode</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 30 Days Technical Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('WhatsApp Business Pro (₹9,999)')" class="w-full py-2.5 bg-brand-accent text-brand-black font-bold rounded hover:bg-emerald-400 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">Select Plan →</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- BUNDLES SUB-VIEW -->
+            <div id="view-bundles" class="pricing-view hidden space-y-8 font-mono text-xs">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="bg-brand-dark p-6 rounded-xl border-2 border-brand-accent space-y-5 tilt-card shadow-[0_0_25px_rgba(16,185,129,0.15)] flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="space-y-1">
+                                <div class="text-[9px] text-brand-accent font-bold uppercase tracking-wider">🚀 Complete Launch Bundle</div>
+                                <h4 class="text-xl font-bold text-white">Business Growth Bundle</h4>
+                                <div class="text-3xl text-brand-accent font-extrabold">₹22,999</div>
+                                <p class="text-brand-textMuted text-[11px]">Combines full Website setup with automated WhatsApp customer acquisition.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">Bundle Package Deliverables:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-white"><i class="fa-solid fa-globe text-brand-accent mt-0.5"></i> <strong>Domain Included:</strong> 1 Year (.com / .in)</li>
+                                    <li class="flex items-start gap-2 text-white"><i class="fa-solid fa-server text-brand-accent mt-0.5"></i> <strong>10 GB SSD Cloud Hosting</strong> (1 Year Included)</li>
+                                    <li class="flex items-start gap-2 text-white"><i class="fa-solid fa-lock text-brand-accent mt-0.5"></i> <strong>Free SSL Certificate &amp; HTTPS</strong></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Multi-page Custom Business Website</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> WhatsApp Business Automation Setup</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Google Sheets Real-time Lead Sync</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Google Analytics &amp; Basic SEO</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 30 Days Combined Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('Business Growth Bundle (₹22,999)')" class="w-full py-3 bg-brand-accent text-brand-black font-bold rounded hover:bg-emerald-400 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">Get Bundle Quote →</button>
+                    </div>
+
+                    <div class="bg-brand-dark p-6 rounded-xl border border-brand-lightgray space-y-5 tilt-card hover:border-brand-accent transition-all flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="space-y-1">
+                                <div class="text-[9px] text-purple-400 font-bold uppercase tracking-wider">🤖 Enterprise AI Solution</div>
+                                <h4 class="text-xl font-bold text-white">Digital Pro AI Bundle</h4>
+                                <div class="text-3xl text-brand-accent font-extrabold">₹39,999<span class="text-sm text-brand-textMuted font-normal">+</span></div>
+                                <p class="text-brand-textMuted text-[11px]">High-performance website + Custom AI Knowledge Chatbot agent.</p>
+                            </div>
+                            <div class="h-[1px] bg-brand-lightgray/50"></div>
+                            <div class="space-y-2 text-brand-textMuted text-[11px]">
+                                <div class="font-bold text-white uppercase text-[10px] tracking-wider">Bundle Package Deliverables:</div>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-white"><i class="fa-solid fa-globe text-brand-accent mt-0.5"></i> <strong>Domain Included:</strong> 1 Year (.com / .in)</li>
+                                    <li class="flex items-start gap-2 text-white"><i class="fa-solid fa-server text-brand-accent mt-0.5"></i> <strong>25 GB NVMe SSD Cloud Hosting</strong> (1 Year Included)</li>
+                                    <li class="flex items-start gap-2 text-white"><i class="fa-solid fa-robot text-purple-400 mt-0.5"></i> <strong>Custom AI Agent trained on your business data</strong></li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Website AI Chat Widget + WhatsApp Integration</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Advanced SEO &amp; Google Search Console Indexing</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-accent mt-0.5"></i> Speed Optimization (90+ score)</li>
+                                    <li class="flex items-start gap-2"><i class="fa-solid fa-clock text-emerald-400 mt-0.5"></i> 90 Days Priority Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="scrollToQuoteForm('Digital Pro AI Bundle (₹39,999+)')" class="w-full py-3 bg-brand-accent/20 border border-brand-accent/50 text-brand-accent font-bold rounded hover:bg-brand-accent hover:text-brand-black transition-all">Get AI Pro Quote →</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- EXTERNAL COST & STORAGE DISCLOSURE -->
+            <div class="bg-brand-dark/80 border border-amber-500/30 p-4 rounded-xl font-mono text-xs text-brand-textMuted space-y-1">
+                <div class="text-amber-400 font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info"></i> Standard Hosting &amp; External Cost Disclosure:
+                </div>
+                <p class="text-[11px] leading-relaxed">
+                    Hosting packages specify exact SSD storage limits (10 GB SSD for Business / 25 GB NVMe SSD for Premium). Third-party costs such as annual domain/hosting renewals after Year 1, official Meta WhatsApp messaging fees, and AI API token usage (e.g., OpenAI / Gemini API credits) are billed separately per official provider rates unless explicitly specified in your official statement of work.
+                </p>
+            </div>
+
+            <!-- DEDICATED QUOTE FORM -->
+            <section id="pricing-quote-section" class="pt-8 border-t border-brand-lightgray/50 space-y-6">
+                <div class="space-y-2">
+                    <div class="font-mono text-xs text-brand-accent uppercase tracking-widest">&gt; Project Scope &amp; Quote Request</div>
+                    <h3 class="text-2xl font-bold text-white">Request Your Custom Proposal</h3>
+                </div>
+
+                <div id="quote-notice-box" class="bg-brand-accent/10 border border-brand-accent/40 p-3 rounded-lg font-mono text-xs text-brand-accent flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-sm"></i>
+                    <span id="quote-notice-text">Selected Service: General Inquiry / Custom Quotation</span>
+                </div>
+
+                <form id="pricingQuoteForm" action="https://formspree.io/f/xjgngqvo" method="POST" class="bg-brand-dark p-6 sm:p-8 rounded-xl border border-brand-lightgray space-y-5 font-mono text-xs shadow-2xl">
+                    <input type="hidden" id="selected_service_field" name="selected_service" value="General Inquiry">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-brand-textMuted block mb-1">Full Name *</label>
+                            <input type="text" name="full_name" required placeholder="Your Name" class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+                        <div>
+                            <label class="text-brand-textMuted block mb-1">Business Name *</label>
+                            <input type="text" name="business_name" required placeholder="Your Company" class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+                        <div>
+                            <label class="text-brand-textMuted block mb-1">Email Address *</label>
+                            <input type="email" name="email" required placeholder="email@domain.com" class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+                        <div>
+                            <label class="text-brand-textMuted block mb-1">WhatsApp / Phone *</label>
+                            <input type="tel" name="whatsapp_phone" required placeholder="+91 98765 43210" class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-brand-textMuted block mb-1">Additional Project Details</label>
+                        <textarea name="additional_requirements" rows="3" placeholder="Describe your goals..." class="w-full bg-brand-black border border-brand-lightgray rounded px-3 py-2 text-white focus:outline-none focus:border-brand-accent"></textarea>
+                    </div>
+
+                    <button type="submit" id="pricingSubmitBtn" class="w-full py-3 bg-brand-accent text-brand-black font-bold font-mono text-xs rounded hover:bg-emerald-400 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Proposal Request →
+                    </button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black border-t border-brand-lightgray py-8 px-6 text-center text-xs font-mono text-brand-textMuted relative z-10">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>Built by <span class="text-white font-bold">Sk Md Sohaib</span> // Burdwan, India</div>
+            <div class="flex gap-4">
+                <a href="https://github.com/skmd-sohaib" target="_blank" class="hover:text-brand-accent transition-colors">GitHub</a>
+                <a href="https://www.linkedin.com/in/skmd-sohaib" target="_blank" class="hover:text-brand-accent transition-colors">LinkedIn</a>
+                <a href="https://youtube.com/@sohaibframes" target="_blank" class="hover:text-brand-accent transition-colors">YouTube</a>
+            </div>
+            <div>© 2026 / Software Engineer</div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Handles
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const cursorGlow = document.getElementById('cursor-glow');
+
+        // Spotlight Inertia Motion
+        let mouseX = 0, mouseY = 0, xp = 0, yp = 0;
+        window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        setInterval(() => {
+            xp += (mouseX - xp) * 0.12; yp += (mouseY - yp) * 0.12;
+            if (cursorGlow) { cursorGlow.style.left = xp + 'px'; cursorGlow.style.top = yp + 'px'; }
+        }, 12);
+
+        // Mobile Nav Toggle
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+
+        // Click Sparkle Burst Engine
+        const clickCanvas = document.getElementById('clickCanvas');
+        if (clickCanvas) {
+            const cCtx = clickCanvas.getContext('2d');
+            let sparkles = [];
+
+            function resizeClickCanvas() {
+                clickCanvas.width = window.innerWidth;
+                clickCanvas.height = window.innerHeight;
+            }
+            resizeClickCanvas();
+            window.addEventListener('resize', resizeClickCanvas);
+
+            window.addEventListener('click', (e) => {
+                for (let i = 0; i < 12; i++) {
+                    sparkles.push({
+                        x: e.clientX,
+                        y: e.clientY,
+                        vx: (Math.random() - 0.5) * 6,
+                        vy: (Math.random() - 0.5) * 6,
+                        size: Math.random() * 3 + 1.5,
+                        color: `hsl(${150 + Math.random() * 30}, 100%, 60%)`,
+                        alpha: 1,
+                        life: 1
+                    });
+                }
+            });
+
+            function animateClickSparkles() {
+                cCtx.clearRect(0, 0, clickCanvas.width, clickCanvas.height);
+                sparkles.forEach((p, idx) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.alpha -= 0.03;
+                    p.life -= 0.03;
+
+                    if (p.alpha <= 0) {
+                        sparkles.splice(idx, 1);
+                    } else {
+                        cCtx.beginPath();
+                        cCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        cCtx.fillStyle = p.color;
+                        cCtx.globalAlpha = p.alpha;
+                        cCtx.fill();
+                        cCtx.globalAlpha = 1;
+                    }
+                });
+                requestAnimationFrame(animateClickSparkles);
+            }
+            animateClickSparkles();
+        }
+
+        // Background Particle Canvas Engine
+        const canvas = document.getElementById('particleCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const particleCount = 45;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.6;
+                    this.vy = (Math.random() - 0.5) * 0.6;
+                    this.radius = Math.random() * 1.8 + 0.8;
+                    this.alpha = Math.random() * 0.5 + 0.2;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(16, 185, 129, ${this.alpha})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 110) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(16, 185, 129, ${0.15 - dist / 110 * 0.15})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+        }
+
+        // Hero Typing Engine
+        const typedTextSpan = document.getElementById('typed-text');
+        const textArray = ["Python Learner", "Software Engineer Target", "Automation Developer", "Vibe Coder"];
+        let textArrayIndex = 0, charIndex = 0;
+
+        function type() {
+            if (!typedTextSpan) return;
+            if (charIndex < textArray[textArrayIndex].length) {
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 85);
+            } else {
+                setTimeout(erase, 2200);
+            }
+        }
+
+        function erase() {
+            if (!typedTextSpan) return;
+            if (charIndex > 0) {
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 40);
+            } else {
+                textArrayIndex = (textArrayIndex + 1) % textArray.length;
+                setTimeout(type, 400);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            if (textArray.length) setTimeout(type, 500);
+        });
+
+        // Interactive Shell CLI Engine
+        const cliOutput = document.getElementById('cli-output');
+        const cliForm = document.getElementById('cli-form');
+        const cliInput = document.getElementById('cli-input');
+
+        const cliCommands = {
+            'help': 'Available: <span class="text-emerald-400 font-bold">about, skills, work, pricing, matrix, clear, sudo</span>',
+            'about': 'Sk Md Sohaib — Python Developer & Aspiring Software Engineer based in Burdwan, WB.',
+            'skills': 'Python, C Language, HTML/CSS/JS, Flutter, Git, GitHub',
+            'work': 'Solo Animator & The QR GenZ — Live platforms by Sohaib. View projects section for links!',
+            'pricing': 'Web Dev from ₹3,999 / WhatsApp Auto from ₹4,999. Visit Pricing Page!',
+            'sudo': 'Permission denied: Access granted to Sk Md Sohaib only ;)',
+            'matrix': '01010011 01001111 01001000 01000001 01001001 01000010 (Matrix SOHAIB Mode Enabled 🟩)'
+        };
+
+        function runCliCommand(cmd) {
+            if (!cliOutput) return;
+            const clean = cmd.trim().toLowerCase();
+            if (clean === 'clear') {
+                cliOutput.innerHTML = '<p class="text-brand-accent">&gt; Live Shell Cleared. Type "help" for options.</p>';
+                return;
+            }
+
+            const line = document.createElement('p');
+            line.className = 'text-xs border-l-2 border-brand-accent pl-2 py-0.5 my-1 bg-brand-black/40';
+
+            if (cliCommands[clean]) {
+                line.innerHTML = `<span class="text-emerald-400 font-bold">&gt; ${clean}:</span> ${cliCommands[clean]}`;
+            } else {
+                line.innerHTML = `<span class="text-rose-400">&gt; Command not recognized: '${clean}'. Type 'help' for command list.</span>`;
+            }
+
+            cliOutput.appendChild(line);
+            cliOutput.scrollTop = cliOutput.scrollHeight;
+        }
+
+        if (cliForm) {
+            cliForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                runCliCommand(cliInput.value);
+                cliInput.value = '';
+            });
+        }
+
+        // Scroll Top Progress Bar
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            if (scrollProgress) scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Intersection Observer for Reveal Elements & Stats Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const counters = document.querySelectorAll('.counter-val');
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+
+                    // Animate skill progress bars
+                    entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-level');
+                    });
+
+                    // Animate number counter statistics
+                    entry.target.querySelectorAll('.counter-val').forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        let current = 0;
+                        const increment = Math.max(1, Math.floor(target / 30));
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = target + (target === 100 && counter.getAttribute('data-target') === "100" ? "+" : "");
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = current;
+                            }
+                        }, 40);
+                    });
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // 3D Card Tilt Interaction
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y / 25}deg) rotateY(${x / 25}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
+        });
+
+        // Tech Stack Category Filtering
+        function filterTech(category) {
+            const cards = document.querySelectorAll('.tech-card');
+            const btns = document.querySelectorAll('#tech-filters button');
+
+            btns.forEach(btn => {
+                btn.className = "tech-filter-btn px-3 py-1.5 rounded bg-brand-dark text-brand-textMuted border border-brand-lightgray hover:border-brand-accent transition-all";
+            });
+            event.target.className = "tech-filter-btn px-3 py-1.5 rounded bg-brand-accent/20 text-brand-accent border border-brand-accent font-semibold transition-all";
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Navigation View Switcher
+        function navigateTo(targetPage, targetSection = null) {
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+
+            const homePage = document.getElementById('page-home');
+            const pricingPage = document.getElementById('page-pricing');
+
+            if (targetPage === 'pricing') {
+                homePage.classList.add('hidden');
+                pricingPage.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                pricingPage.classList.add('hidden');
+                homePage.classList.remove('hidden');
+                if (targetSection) {
+                    const sec = document.getElementById(targetSection);
+                    if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        }
+
+        function switchPricingView(viewName) {
+            document.querySelectorAll('.pricing-view').forEach(v => v.classList.add('hidden'));
+            document.querySelectorAll('.pricing-tab-btn').forEach(b => b.classList.remove('active'));
+
+            const targetView = document.getElementById(`view-${viewName}`);
+            const targetTab = document.getElementById(`tab-${viewName}`);
+
+            if (targetView) targetView.classList.remove('hidden');
+            if (targetTab) targetTab.classList.add('active');
+        }
+
+        // Interactive Price Estimator Engine
+        function calculateEstimate() {
+            let total = 0;
+            if (document.getElementById('opt-website').checked) total += 3999;
+            if (document.getElementById('opt-domain-hosting').checked) total += 3000;
+            if (document.getElementById('opt-whatsapp').checked) total += 4999;
+            if (document.getElementById('opt-ai').checked) total += 10000;
+
+            const priceDisplay = document.getElementById('est-total-price');
+            if (priceDisplay) priceDisplay.textContent = `₹${total.toLocaleString('en-IN')}`;
+        }
+
+        function applyEstimateToForm() {
+            const priceDisplay = document.getElementById('est-total-price');
+            const estText = priceDisplay ? priceDisplay.textContent : 'Custom Estimate';
+            scrollToQuoteForm(`Interactive Calculator Estimate (${estText})`);
+        }
+
+        function scrollToQuoteForm(serviceTitle) {
+            const noticeBox = document.getElementById('quote-notice-text');
+            const hiddenField = document.getElementById('selected_service_field');
+            
+            if (noticeBox) noticeBox.innerHTML = `Selected Package: <strong>${serviceTitle}</strong>`;
+            if (hiddenField) hiddenField.value = serviceTitle;
+
+            const quoteSec = document.getElementById('pricing-quote-section');
+            if (quoteSec) quoteSec.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
